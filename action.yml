@@ -1,0 +1,34 @@
+name: 'Canary Deployment Verification'
+description: 'Test Canary Deployment Verification'
+inputs:
+  microservice-name:
+    description: "The name of the microservice to verify"
+    required: true
+    default: ""
+  enable-debug:
+    description: "Enable debug output during the action run"
+    required: false
+    default: "false"
+  cluster-name:
+    description: "Cluster name"
+    required: true
+    default: "env-name"
+  namespace-name:
+    description: "namespace naame"
+    required: true
+    default: "namespace"
+
+outputs:
+  time: # id of output
+    description: 'execution time'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.microservice-name }}
+    - ${{ inputs.enable-debug }}
+    - ${{ inputs.cluster-name }}
+    - ${{ inputs.namespace-name }}
+    - ${{ inputs.duration }}
+    - ${{ inputs.interval }}
+    - ${{ inputs.wait }}
